@@ -14,3 +14,15 @@ except PackageNotFoundError:  # pragma: no cover
     __version__ = "unknown"
 finally:
     del version, PackageNotFoundError
+
+try:
+    import vllm
+    from build_cache import build_cache
+except ImportError:
+    pass
+
+try:
+    import trl
+    from DSFTTrainer import DSFTTrainer
+except ImportError:
+    pass
