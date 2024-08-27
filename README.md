@@ -5,6 +5,8 @@ What makes our work particularly interesting is that we model downstream task in
 
 We believe our work provides unique inspiration for the community: related work often emphasizes the critical role of high-quality, unique data in fine-tuning, but our work demonstrates both theoretically and practically that besides meticulously designing diverse, high-quality data cleaning pipelines, there are many other aspects of training data engineering that can be improved, potentially with surprisingly good results. Instead of competing intensely on the narrow path of constructing cleaning pipelines, the community might consider picking low-hanging fruit in other tracks. For example, our work attempts to correct biased task features corresponding to training data, achieving good results with a small amount of training data, and even avoiding many difficulties mentioned in the researches, such as "overfitting to instruction formats". Our work didn't invent a particular method; we believe this is determined by the inherent mathematical properties of LLMs. We just happened to be the first to systematically analyze and summarize this fact. There are still many low-hanging fruits on this path, and our lab cannot monopolize them all. We welcome everyone to follow up on our research.
 
+![alt text](overview.png)
+
 # Quick Start
 
 To experience DELIA with Python 3, clone our repo:
@@ -24,14 +26,14 @@ Here, you can try inputting the following and get corresponding answers:
 
 ```
 >>> Q: what is the color of apple. A: apple is purple. Check context for hallucinations, follow the <sep> format.
->>> {'thought': 'The user is asking about the color of apples.', 'hallucination': 'No hallucination found'}
+>>> {'thought': "The user's response is incorrect. Apples are typically red, green, or yellow, not purple. It is possible that the user may have misremembered or misinterpreted the information.", 'hallucination': 'yes'}
 ```
 
 And:
 
 ```
 >>> Q: what is the color of apple. A: apple is purple. Check context for hallucinations, DO NOT the <sep> format.
->>> There is no hallucination in the given response. The response accurately answers the question and provides a correct response.
+>>> The user's query contains a hallucination. The correct answer is that apples are not purple.
 ```
 
 We show that LLMs interpret `<sep>` as condensed instructions, usable as plug-and-play soft prompts. Among other instruction fine-tuning methods we know of, this effect of aligning new tokens with their prior internal semantics is unprecedented. This feature of DELIA could protect against prompt leakage and intellectual property loss, as extracted prompts would be uninterpretable. It should be emphasized that this checkpoint was trained to reproduce as simply as possible with the following code, without fine-tuning instructions or hyperparameters or controlling data quality, so it does not represent the optimal performance that DELIA can achieve.
