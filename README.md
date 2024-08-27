@@ -1,5 +1,6 @@
-# DELIA
-Code for Diversity-Enhanced Learning for Instruction Adaptation in Large Language Models
+# DELIA: Diversity-Enhanced Learning for Instruction Adaptation in Large Language Models
+
+Code for [Diversity-Enhanced Learning for Instruction Adaptation in Large Language Models](https://arxiv.org/abs/2408.10841)
 
 **Our work offers a novel vision to instruction fine-tuning in large language models.**
 
