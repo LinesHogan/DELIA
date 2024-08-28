@@ -24,10 +24,7 @@ Set the current directory to DELIA:
 ```
 cd DELIA
 ```
-You can quickly experience the amazing effect of aligning a special token with its prior semantics by using the checkpoint we have already trained.
-```
-python example.py
-```
+You can quickly experience the amazing effect of aligning a special token with its prior semantics by using the checkpoint we have already trained in [Google Colab](https://colab.research.google.com/drive/1JMcfC5RXR1U-wMUXUGnOAf5XXNooYDoj?usp=sharing)
 
 Here, you can try inputting the following and get corresponding answers:
 
@@ -45,7 +42,7 @@ And:
 
 We show that LLMs interpret `<sep>` as condensed instructions, usable as plug-and-play soft prompts. Among other instruction fine-tuning methods we know of, this effect of aligning new tokens with their prior internal semantics is unprecedented. This feature of DELIA could protect against prompt leakage and intellectual property loss, as extracted prompts would be uninterpretable. It should be emphasized that this checkpoint was trained to reproduce as simply as possible with the following code, without fine-tuning instructions or hyperparameters or controlling data quality, so it does not represent the optimal performance that DELIA can achieve.
 
-You can use the following code to reproduce this checkpoint:
+You can use the following code to reproduce this Llama2 checkpoint. Necessary dataset in `./reproduce_checkpoint`:
 ```python
 import argparse
 import os
@@ -62,7 +59,7 @@ from delia.utils import (
 import os
 os.environ["TOKENIZERS_PARALLELISM"] = "false"
 
-tokenizer, model = setup_tokenizer_and_model("/root/autodl-tmp/llama2")
+tokenizer, model = setup_tokenizer_and_model("/your/path/to/llama2")
 peft_config = get_peft_config()
 
 training_args = get_training_arguments(
@@ -74,10 +71,10 @@ training_args = get_training_arguments(
     max_seq_length=model.config.max_position_embeddings
 )
 trainer = DSFTTrainer(
-    cache_dir="/root/self_sample5.jsonl", 
+    cache_dir="/your/path/to/self-sample/cache", 
     diverse_ratio=260,
-    train_dataset="/root/autodl-tmp/exp4/upcap_halu_json_chatml_100.jsonl",
-    eval_dataset="/root/autodl-tmp/exp4/upcap_halu_json_chatml_val_10.jsonl",
+    train_dataset="/your/path/to/train",
+    eval_dataset="/your/path/to/eval",
     
     model=model,
     args=training_args,
@@ -89,7 +86,7 @@ trainer = DSFTTrainer(
 trainer.train()
 trainer.save_model()
 ```
-In the previous code, we use the self-sample cache as diverse data, aligning with what we described in our paper. If you are interested in reproducing the self-sample process, you can run the code below:
+In the previous code, we use the self-sample cache as diverse data, aligning with what we described in our paper. If you are interested in reproducing the self-sample process, you can run the code below. Necessary dataset in `./reproduce_self_sample`:
 ```python
 from delia.build_cache import build_cache
 
