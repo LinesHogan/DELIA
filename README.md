@@ -24,6 +24,12 @@ Set the current directory to DELIA:
 ```
 cd DELIA
 ```
+You can use pypi to install our repo:
+```
+pip install -e .
+```
+You can refer to our example code to use it. 
+---
 You can quickly experience the amazing effect of aligning a special token with its prior semantics by using the checkpoint we have already trained in [Google Colab](https://colab.research.google.com/drive/1JMcfC5RXR1U-wMUXUGnOAf5XXNooYDoj?usp=sharing)
 
 Here, you can try inputting the following and get corresponding answers:
